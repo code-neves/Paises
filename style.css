@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background-color: rgb(186, 199, 189);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  margin-top: 20px;
+}
+
+#exibicao-palavra {
+  font-size: 48px;
+  margin-top: 20px;
+  /* color: rgb(255, 255, 255); */
+}
+
+#teclado {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px auto;
+  max-width: 700px;
+}
+
+.tecla {
+  width: 50px;
+  height: 50px;
+  margin: 8px;
+  border-radius: 8px;
+  outline: solid 4px black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  background-color: rgba(255, 255, 255, 0.56);
+  font-size: 24px;
+  font-weight: 600;
+
+  &:hover {
+    background-color: rgb(255, 255, 255);
+  }
+}
+
+.tecla.clicada {
+  background-color: rgb(0, 0, 0);
+  color: white;
+  outline: solid 4px white;
+  pointer-events: none;
+}
+.tecla.wrong {
+  background-color: #ff6b6b; /* Red color for wrong letters */
+}
+
+.tecla.correct {
+  background-color: #70db70; /* Green color for correct letters */
+}
+
+.winning {
+  color: rgb(5, 255, 5) ; /* Change to the desired color */
+  transform: scale(1.2);
+  
+}
+.losing{
+  color: rgb(255, 5, 5) ; /* Change to the desired color */
+  transform: scale(1.2);
+  
+}
+#restart-button{
+  width: fit-content;
+  cursor: pointer;
+  border: none;
+  padding: 0 16px;
+}
