@@ -1,4 +1,5 @@
-const palavras = ["MAÇÃ", "BANANA", "CEREJA", "DATA", "SABUGUEIRO", "FIGO", "UVA"];
+let palavras;
+let regiao = '';
 
 let palavraSelecionada = "";
 let letrasAdivinhadas = [];
@@ -11,11 +12,98 @@ const restartButton = document.getElementById("restart-button");
 const winMessage = document.getElementById("win-message");
 const loseMessage = document.getElementById("lose-message");
 
+
+const pDifficult = document.querySelectorAll('.dificuldade p');
+const pContinent = document.querySelectorAll('.continente p');
+const btnContinentes = document.getElementById('continentes');
+const btnDificuldade = document.getElementById('dificuldade');
+
+
+
+pDifficult.forEach(pTag => {
+    pTag.addEventListener('click', dificuldade);
+});
+
+pContinent.forEach(pTag => {
+    pTag.addEventListener('click', continentes);
+});
+
+
+function getApi() {
+    let dataPaises = [];
+    fetch('https://servicodados.ibge.gov.br/api/v1/paises/{paises}')
+        .then(response => response.json())
+        .then(paises => {
+            for (let pais in paises) {
+                if (paises[pais].localizacao.regiao.nome == regiao) {
+                    if ((paises[pais].nome.abreviado).length <= 15 && !dataPaises.includes(paises[pais].nome.abreviado)) {
+                        let array = (paises[pais].nome.abreviado).split('');
+                        if (!array.includes(' ') && !array.includes('-')) {
+                            dataPaises.push(paises[pais].nome.abreviado);
+                        }
+
+                    }
+
+                }
+            }
+        });
+    return dataPaises;
+}
+
+function dificuldade(event) {
+
+    if (event.target.textContent == 'Fácil - 6 vidas') {
+        btnDificuldade.innerText = event.target.textContent;
+        tentativasRestantes = 6;
+    } else if (event.target.textContent == 'Médio - 4 vidas') {
+        btnDificuldade.innerText = event.target.textContent;
+        tentativasRestantes = 4;
+    } else if (event.target.textContent == 'Difícil - 2 vidas') {
+        btnDificuldade.innerText = event.target.textContent;
+        tentativasRestantes = 2;
+    } else {
+        tentativasRestantes = 6;
+    };
+
+
+};
+
+function continentes(event) {
+
+    for (let i = 0; i <= pContinent.length; i++) {
+        if (event.target.textContent == pContinent[i].textContent) {
+            btnContinentes.innerText = event.target.textContent;
+            regiao = event.target.textContent;
+            palavras = getApi();
+            console.log(palavras);
+        }
+    }
+
+}
+
+function iniciar() {
+    if (regiao == "" || palavras == undefined) {
+        alert('Escolha a dificuldade e o continente para iniciar o jogo')
+    } else if (restartButton.innerText == 'REINICIAR') {
+        location.reload();
+    } else {
+        configurarJogo();
+        console.log("Iniciando o jogo...");
+        document.querySelector('.dificuldade').style.display = 'none';
+        document.querySelector('.continente').style.display = 'none';
+        btnContinentes.style.backgroundColor = '#3e8e41';
+        btnDificuldade.style.backgroundColor = '#3e8e41';
+        restartButton.innerText = 'REINICIAR';
+
+    }
+
+}
+
+
 function configurarJogo() {
     console.log("Configurando o jogo...");
     palavraSelecionada = palavras[Math.floor(Math.random() * palavras.length)];
     letrasAdivinhadas = [];
-    tentativasRestantes = 6;
 
     atualizarExibicao();
     atualizarLetrasAdivinhadasDisplay();
@@ -31,7 +119,7 @@ function removeAccents(str) {
 function atualizarExibicao() {
     let displayText = "";
 
-    for (let i = 0; i < palavraSelecionada.length; i++) {
+    for (let i of palavraSelecionada) {
         const letra = palavraSelecionada[i];
         if (letrasAdivinhadas.includes(letra)) {
             displayText += letra;
@@ -119,21 +207,4 @@ function mostrarResultado(vencedor) {
 
 }
 
-restartButton.addEventListener("click", () => {
-    winMessage.innerHTML = "";
-    loseMessage.innerHTML = "";
-    configurarJogo();
-});
 
-console.log("Iniciando o jogo...");
-configurarJogo(); // Automatically start the game when the page loads
-
-
-restartButton.addEventListener("click", () => {
-    winMessage.innerHTML = "";
-    loseMessage.innerHTML = "";
-    configurarJogo();
-});
-
-console.log("Iniciando o jogo...");
-configurarJogo(); // Inicia quando a página carrega.
