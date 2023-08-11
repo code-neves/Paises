@@ -7,15 +7,48 @@
   <title>Jogo da Forca</title>
 </head>
 <body>
-  <h1>Jogo da Forca</h1>
+  <header>
+
+    <h1>Jogo da Forca</h1>
+    <h2>Países</h2>
+
+    <nav>
+
+        <div class="dropdown">
+
+            <button class="dropbtn" id="dificuldade">Escolha a dificuldade</button>
+
+            <div class="dropdown-content dificuldade">
+                <p id="facil">Fácil - 6 vidas</p>
+                <p id="medio">Médio - 4 vidas</p>
+                <p id="dificil">Difícil - 2 vidas</p>
+            </div>
+
+        </div>
+
+        <div class="dropdown">
+
+            <button class="dropbtn" id="continentes">Escolha um continente</button>
+
+            <div class="dropdown-content continente">
+                <p id="africa">África</p>
+                <p id="america">América</p>
+                <p id="asia">Ásia</p>
+                <p id="europa">Europa</p>
+                <p id="oceania">Oceania</p>
+            </div>
+
+        </div>
+    </nav>
+</header>
   <div id="win-message"></div>
   <div id="lose-message"></div> 
   <div id="exibicao-palavra"></div>
   <div id="letras-adivinhadas"></div>
   <div id="teclado"></div>
-  <button id="restart-button" class="tecla">REINICIAR</button>
+  <button id="restart-button" class="tecla" onclick="iniciar()">INICIAR</button>
   
-  <script src="script.js"></script>
+  <script src="./script.js"></script>
 </body>
 </html>
  
