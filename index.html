@@ -1,22 +1,23 @@
- <!DOCTYPE html>
-<html lang="pt-br">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <title>Jogo da Forca</title>
+  <title>Document</title>
+  <link href="style.css" rel="stylesheet">
 </head>
 <body>
+
   <header>
 
-    <h1>Jogo da Forca</h1>
-    <h2>Países</h2>
+    <h1>Países</h1>
+    <h2>Hangman Game: Country Edition</h2>
 
     <nav>
 
         <div class="dropdown">
 
-            <button class="dropbtn" id="dificuldade">Escolha a dificuldade</button>
+            <button class="dropbtn" id="dificuldade">DIFICULDADE</button>
 
             <div class="dropdown-content dificuldade">
                 <p id="facil">Fácil - 6 vidas</p>
@@ -28,7 +29,7 @@
 
         <div class="dropdown">
 
-            <button class="dropbtn" id="continentes">Escolha um continente</button>
+            <button class="dropbtn" id="continentes">CONTINENTE</button>
 
             <div class="dropdown-content continente">
                 <p id="africa">África</p>
@@ -41,16 +42,22 @@
         </div>
     </nav>
 </header>
-  <div id="win-message"></div>
-  <div id="lose-message"></div> 
+
+  <!-- Divs para exibir mensagens, palavra e teclado -->
   <div id="exibicao-palavra"></div>
-  <div id="letras-adivinhadas"></div>
   <div id="teclado"></div>
-  <button id="restart-button" class="tecla" onclick="iniciar()">INICIAR</button>
-  
+  <div id="win-message"></div>
+  <div id="lose-message"></div>
+  <!-- Botões do jogo -->
+  <div id="game-buttons" class="buttons">
+    <button id="play-again-button" class="button">Jogar Novamente</button>
+    <button id="return-to-menu-button" class="button">Voltar ao Menu</button>
+  </div>
+
+  <!-- Botão para iniciar o jogo -->
+  <button id="start-button" onclick="iniciar()">INICIAR</button>
+
+  <!-- Script JavaScript -->
   <script src="./script.js"></script>
 </body>
 </html>
- 
-
- 

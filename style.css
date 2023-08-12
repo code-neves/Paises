@@ -1,4 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+*{
+  
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  text-decoration: none;
+  list-style: none;
+  border: none;
+  outline: none;
+}
+:root{
+  font-size: 10px;
+
+  --glassy-bg: rgba(255, 255, 255, 0.2);
+  --glassy-bg-hover: rgba(255, 255, 255, 0.25);
+  --glassy-outline: rgba(255, 255, 255, 0.7);
+  
+}
 
 body {
   font-family: 'Poppins', sans-serif;
@@ -6,18 +24,35 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
-  background-color: rgb(186, 199, 189);
-
+  background-image: url(./image/bg.png);
+  background-size: cover;
+  color: white;
+  font-weight: 600;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  gap: 3rem;
 }
 
 /* HEADER */
+header{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.6rem;
+  
+}
 
 h1 {
-  margin-top: 20px;
+  font-size: 8.2rem;
+  margin: 0;
+}
+h2{
+  font-size: 2.8rem;
+  margin-bottom: 1.6rem;
 }
 
 nav {
@@ -27,38 +62,63 @@ nav {
   gap: 2rem;
 }
 
-.dropbtn {
-  background-color: #70db70;
-  width: 170px;
-  color: white;
-  padding: 10px;
-  font-size: 0.8rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-
 .dropdown {
   position: relative;
   display: inline-block;
+  font-weight: bold;
+
+  & button{
+    font-weight: bold;
+  }
 }
+
+.dropbtn {
+  background-color: var(--glassy-bg);
+  outline: solid 1px var(--glassy-outline);
+  box-shadow: 0 0 16px 0px rgba(0, 0, 0, 0.3);
+
+  width: 250px;
+  color: rgba(255, 255, 255, 0.866);
+  padding: 10px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  
+  transition: 0.2s ease;
+  overflow: hidden;
+}
+
 
 .dropdown-content {
-  display: none;
+  opacity: 0;
   position: absolute;
-  background-color: rgb(210, 224, 215);
-  width: 170px;
+  /* background-color: rgb(210, 224, 215); */
+  background-color: var(--glassy-bg);
+  width: 100%;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
+  border-radius: 0 0 8px 8px;
   z-index: 1;
+  font-weight: bold;
+  outline: solid 1px var(--glassy-outline);
+  transition: 0.3s ease;
+
+  & p {
+    font-size: 1.6rem;
+    display: block;
+  }
 }
 
-.dropdown-content p {
-  font-size: 0.8rem;
-  color: black;
-  display: block;
+p:hover {
+      
+  transition: 0.3s ease;
+  color: red;
+  text-decoration: underline;
+
+  transform: translateY(-2px);
 }
+
 
 .dropdown-content p:hover {
   color: #ffffff;
@@ -66,16 +126,19 @@ nav {
 }
 
 .dropdown:hover .dropdown-content {
-  display: block;
+  opacity: 1;
+  max-height: fit-content;
+  
 }
 
 .dropdown:hover .dropbtn {
-  background-color: #3e8e41;
+  background-color: var(--glassy-bg-hover);
+  transition: 0.2s ease;
+  border-radius: 5px 5px 0 0;
 }
 
 #exibicao-palavra {
   font-size: 48px;
-  margin-top: 20px;
   /* color: rgb(255, 255, 255); */
 }
 
@@ -83,7 +146,7 @@ nav {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 20px auto;
+  margin: 0px auto;
   max-width: 700px;
 }
 
@@ -92,33 +155,44 @@ nav {
   height: 50px;
   margin: 8px;
   border-radius: 8px;
-  outline: solid 4px black;
+  outline: solid 2px var(--glassy-outline);
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   transition: background-color 0.2s;
-  background-color: rgba(255, 255, 255, 0.56);
+  background-color: rgba(255, 255, 255, 0.2);
   font-size: 24px;
   font-weight: 600;
-
+  transition: 0.125s ease;
   &:hover {
-    background-color: rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0.274);
+    
+    transform: translateY(-4px);
+    transition: 0.175s ease;
+    border-radius: 10px;
+  }
+
+  &:active {
+    transform: translateY(-2px);
+    transform: scale(0.85);
+    border-radius: 12px;
+    transition: 0.125s ease;
   }
 }
-
-.tecla.clicada {
+.tecla.guessed {
   background-color: rgb(0, 0, 0);
   color: white;
-  outline: solid 4px white;
+  outline: solid 3px white;
   pointer-events: none;
+  transform: scale(0.9);
 }
 .tecla.wrong {
-  background-color: #ff6b6b; /* Red color for wrong letters */
+  background-color: #ff4b4b; /* Red color for wrong letters */
 }
 
 .tecla.correct {
-  background-color: #70db70; /* Green color for correct letters */
+  background-color: #28c30d; /* Green color for correct letters */
 }
 
 .winning {
@@ -133,16 +207,77 @@ nav {
 }
 
 #win-message{
-  margin-top: 1rem;
+  color: rgb(5, 255, 5) ;
+  margin-bottom: 1rem;
+  font-size: 2.2rem;
+  display: block;
 }
 
 #lose-message {
-  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-size: 2.2rem;
+  display: block;
+  color: rgb(255, 5, 5) ;
 }
 
-#restart-button{
+#start-button{
   width: fit-content;
   cursor: pointer;
   border: none;
   padding: 0 16px;
+  pointer-events: all;
+  color: white;
+
+  height: 50px;
+  margin: 8px;
+  border-radius: 8px;
+  outline: solid 1px var(--glassy-outline);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  background-color: var(--glassy-bg);
+  font-size: 24px;
+  font-weight: 600;
+  transition: 0.100s ease;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.384);
+    transform: scale(0.95);
+    transition: 0.125s ease;
+  }
+  
+}
+#play-again-button{
+display: none;
+}
+#game-buttons{
+  display: none;
+
+  justify-content: center;
+  align-content: center;
+  gap: 3rem;
+  width: 500px;
+
+  & button{
+    background-color: var(--glassy-bg);
+    outline: solid 1px var(--glassy-outline);
+    box-shadow: 0 0 16px 0px rgba(0, 0, 0, 0.3);
+
+    width: 190px;
+    padding: 10px;
+    color: white;
+    font-size: 1.8rem;
+    font-weight: bold;
+
+    border-radius: 8px;
+    transition: 0.100s ease;
+    cursor: pointer;	
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.385);
+      transform: scale(0.95);
+      transition: 0.125s ease;
+    }
+  }
 }
