@@ -61,7 +61,7 @@ function escolherDificuldade(event) {
         tentativasRestantes = 2;
     } else {
         tentativasRestantes = 0;
-    };
+    }
 }
 
 function escolherContinente(event) {
@@ -200,7 +200,7 @@ playAgainButton.addEventListener("click", () => {
         tentativasRestantes = 2;
     } else {
         tentativasRestantes = 0;
-    };
+    }
 
     configurarJogo();
 
