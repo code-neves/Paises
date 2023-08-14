@@ -9,6 +9,7 @@
   border: none;
   outline: none;
 }
+
 :root{
   font-size: 10px;
 
@@ -21,9 +22,9 @@
 body {
   font-family: 'Poppins', sans-serif;
   text-align: center;
-  margin: 0;
+  margin: auto;
   padding: 0;
-  height: 100vh;
+  height: 100%;
   background-image: url(./image/bg.png);
   background-size: cover;
   color: white;
@@ -105,7 +106,7 @@ nav {
   transition: 0.3s ease;
 
   & p {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     display: block;
   }
 }
@@ -136,6 +137,8 @@ p:hover {
   transition: 0.2s ease;
   border-radius: 5px 5px 0 0;
 }
+
+/* JOGO */
 
 #exibicao-palavra {
   font-size: 48px;
@@ -214,10 +217,10 @@ p:hover {
 }
 
 #lose-message {
+  color: rgb(255, 5, 5) ;  
   margin-bottom: 1rem;
   font-size: 2.2rem;
   display: block;
-  color: rgb(255, 5, 5) ;
 }
 
 #start-button{
@@ -229,7 +232,7 @@ p:hover {
   color: white;
 
   height: 50px;
-  margin: 8px;
+  margin: 8rem 8px 8px 8px;
   border-radius: 8px;
   outline: solid 1px var(--glassy-outline);
   display: flex;

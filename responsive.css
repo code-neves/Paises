@@ -1,0 +1,61 @@
+@media only screen and (max-width: 750px) {
+    body {
+        height: 100%;
+        background-position: top;
+        background-size: auto 100% ;
+    }
+
+    h1 {
+        font-size: 4rem;
+        margin-top: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.7rem;
+        margin-bottom: 3rem;
+    }
+
+    nav {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15rem;
+    }
+
+    .dropbtn {
+        font-size: 1.5rem;
+    }
+
+    #start-button {
+        margin-top: 6rem;
+    }
+
+    #exibicao-palavra {
+        font-size: 3.7rem;
+        margin: 2rem;
+    }
+
+    #teclado {
+        max-width: 500px;
+    }
+
+    #win-message ,
+    #lose-message{
+        font-size: 1.7rem;
+        text-align: center;
+        margin-top: 1rem;
+    }
+
+    #game-buttons {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 3rem;
+    }
+
+    footer {
+        padding: 4.5rem;
+    }
+
+}

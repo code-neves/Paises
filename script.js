@@ -3,7 +3,7 @@ let regiao = '';
 
 let palavraSelecionada = "";
 let letrasAdivinhadas = [];
-let tentativasRestantes = 6;
+let tentativasRestantes = 0;
 let gameIsOver = false;
 
 const exibicaoPalavra = document.getElementById("exibicao-palavra");
@@ -20,6 +20,7 @@ const pDifficult = document.querySelectorAll('.dificuldade p');
 const pContinent = document.querySelectorAll('.continente p');
 const btnContinentes = document.getElementById('continentes');
 const btnDificuldade = document.getElementById('dificuldade');
+let dificuldade = '';
 
 pDifficult.forEach(pTag => {
     pTag.addEventListener('click', escolherDificuldade);
@@ -49,18 +50,18 @@ function getApi() {
 }
 
 function escolherDificuldade(event) {
-    if (event.target.textContent == 'Fácil - 6 vidas') {
-        btnDificuldade.innerText = event.target.textContent;
+    dificuldade = event.target.textContent;
+    btnDificuldade.innerText = dificuldade;
+
+    if (dificuldade == 'Fácil - 6 vidas') {
         tentativasRestantes = 6;
-    } else if (event.target.textContent == 'Médio - 4 vidas') {
-        btnDificuldade.innerText = event.target.textContent;
+    } else if (dificuldade == 'Médio - 4 vidas') {
         tentativasRestantes = 4;
-    } else if (event.target.textContent == 'Difícil - 2 vidas') {
-        btnDificuldade.innerText = event.target.textContent;
+    } else if (dificuldade == 'Difícil - 2 vidas') {
         tentativasRestantes = 2;
-    } else {    
-        tentativasRestantes = undefined;
-    }
+    } else {
+        tentativasRestantes = 0;
+    };
 }
 
 function escolherContinente(event) {
@@ -75,13 +76,15 @@ function escolherContinente(event) {
 }
 
 function iniciar() {
-    if (regiao == "" || palavras == undefined || tentativasRestantes == undefined) {
+    if (regiao == "" || palavras == undefined || tentativasRestantes == 0) {
         alert('Escolha a dificuldade e o continente para iniciar o jogo');
     } else {
         configurarJogo();
         console.log("Iniciando o jogo...");
         document.querySelector('.dificuldade').style.display = 'none';
         document.querySelector('.continente').style.display = 'none';
+        document.querySelector('nav').style.gap = '2.5rem';
+
         startButton.style.display = 'none'; // Hide the start button
         buttonsContainer.style.display = 'flex';
         returnToMenuButton.style.display = 'block';
@@ -188,7 +191,19 @@ function disableTeclado() {
 }
 
 playAgainButton.addEventListener("click", () => {
+    
+    if (dificuldade == 'Fácil - 6 vidas') {
+        tentativasRestantes = 6;
+    } else if (dificuldade == 'Médio - 4 vidas') {
+        tentativasRestantes = 4;
+    } else if (dificuldade == 'Difícil - 2 vidas') {
+        tentativasRestantes = 2;
+    } else {
+        tentativasRestantes = 0;
+    };
+
     configurarJogo();
+
     playAgainButton.style.display = 'none'; // Esconder o botão "Jogar Novamente"
 });
 
@@ -199,8 +214,8 @@ returnToMenuButton.addEventListener("click", retornarAoMenu);
 returnToMenuButton.addEventListener("click", retornarAoMenu);
 
 function retornarAoMenu() {
-    playAgainButton.style.display = 'none'; 
-    returnToMenuButton.style.display = 'none'; 
+    playAgainButton.style.display = 'none';
+    returnToMenuButton.style.display = 'none';
     configurarJogo(); // Reconfigurar o jogo
 
     // Show difficulty and continent buttons
@@ -212,6 +227,7 @@ function retornarAoMenu() {
     buttonsContainer.style.display = 'none'; // Hide game-related buttons
     teclado.style.display = 'none'; // Hide the keyboard
     exibicaoPalavra.textContent = ""; // Clear the word display
+    document.querySelector('nav').style.gap = '15rem';
     console.clear(); // Clear the console
     console.log("Retornando ao menu...");
 }

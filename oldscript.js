@@ -73,7 +73,7 @@ function dificuldade(event) {
 
 function continentes(event) {
 
-    for (let i = 0; i < pContinent.length; i++) {
+    for (let i of pContinent) {
         if (event.target.textContent == pContinent[i].textContent) {
             btnContinentes.innerText = event.target.textContent;
             regiao = event.target.textContent;
@@ -164,7 +164,7 @@ function lidarComClique(letra) {
 
         let letraEncontrada = false;
 
-        for (let i = 0; i < palavraSelecionada.length; i++) {
+        for (let i of palavraSelecionada) {
             const letraPalavraSemAcento = removeAccents(palavraSelecionada[i].toLowerCase());
             if (letraPalavraSemAcento === letraSemAcento) {
                 exibicaoPalavra.textContent = exibicaoPalavra.textContent.substring(0, i) + palavraSelecionada[i] + exibicaoPalavra.textContent.substring(i + 1);
