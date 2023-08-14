@@ -49,11 +49,12 @@ header{
 
 h1 {
   font-size: 8.2rem;
-  margin: 0;
+  margin: 2rem 0 0 0;
 }
+
 h2{
   font-size: 2.8rem;
-  margin-bottom: 1.6rem;
+  margin-bottom: 3rem;
 }
 
 nav {
@@ -232,7 +233,7 @@ p:hover {
   color: white;
 
   height: 50px;
-  margin: 8rem 8px 8px 8px;
+  margin: 7rem 8px 8px 8px;
   border-radius: 8px;
   outline: solid 1px var(--glassy-outline);
   display: flex;
