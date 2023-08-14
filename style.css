@@ -61,7 +61,8 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 2rem;
+  gap: 2.5rem;
+  margin-bottom: 2rem;
 }
 
 .dropdown {
@@ -233,7 +234,7 @@ p:hover {
   color: white;
 
   height: 50px;
-  margin: 7rem 8px 8px 8px;
+  margin: 5rem 8px 8px 8px;
   border-radius: 8px;
   outline: solid 1px var(--glassy-outline);
   display: flex;

@@ -191,7 +191,7 @@ function disableTeclado() {
 }
 
 playAgainButton.addEventListener("click", () => {
-    
+
     if (dificuldade == 'Fácil - 6 vidas') {
         tentativasRestantes = 6;
     } else if (dificuldade == 'Médio - 4 vidas') {
@@ -210,9 +210,6 @@ playAgainButton.addEventListener("click", () => {
 returnToMenuButton.addEventListener("click", retornarAoMenu);
 
 
-
-returnToMenuButton.addEventListener("click", retornarAoMenu);
-
 function retornarAoMenu() {
     playAgainButton.style.display = 'none';
     returnToMenuButton.style.display = 'none';
@@ -227,7 +224,17 @@ function retornarAoMenu() {
     buttonsContainer.style.display = 'none'; // Hide game-related buttons
     teclado.style.display = 'none'; // Hide the keyboard
     exibicaoPalavra.textContent = ""; // Clear the word display
-    document.querySelector('nav').style.gap = '15rem';
+
+    palavras = undefined;
+    tentativasRestantes = 0;
+
+    if (window.matchMedia("(max-width: 750px)").matches) {
+        document.querySelector('nav').style.gap = '15rem';
+    } else {
+        document.querySelector('nav').style.gap = '2.5rem';
+    }
+
+
     console.clear(); // Clear the console
     console.log("Retornando ao menu...");
 }
