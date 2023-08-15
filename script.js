@@ -10,6 +10,10 @@ const exibicaoPalavra = document.getElementById("exibicao-palavra");
 const teclado = document.getElementById("teclado");
 const message = document.querySelector('.message'); 
 
+const victories_and_losses = document.querySelector ('.victories_and_losses');
+let victories = 0;
+let losses = 0;
+
 const startButton = document.getElementById("start-button");
 const playAgainButton = document.getElementById("play-again-button");
 const returnToMenuButton = document.getElementById("return-to-menu-button");
@@ -88,6 +92,7 @@ function iniciar() {
         buttonsContainer.style.display = 'flex';
         returnToMenuButton.style.display = 'block';
         teclado.style.display = 'flex'; // Show the keyboard
+        victoriesAndLosses ();
     }
 }
 
@@ -222,9 +227,12 @@ function retornarAoMenu() {
     buttonsContainer.style.display = 'none'; // Hide game-related buttons
     teclado.style.display = 'none'; // Hide the keyboard
     exibicaoPalavra.textContent = ""; // Clear the word display
+    victories_and_losses.innerHTML = "";
 
     palavras = undefined;
     tentativasRestantes = 0;
+    victories = 0;
+    losses = 0;
 
     if (window.matchMedia("(max-width: 750px)").matches) {
         document.querySelector('nav').style.gap = '15rem';
@@ -248,6 +256,7 @@ function mostrarResultado(vencedor) {
         message.innerHTML = "Você ganhou!";
         playAgainButton.style.display = "block"; // Show Play Again button
         returnToMenuButton.style.display = "block"; // Show Return to Menu button
+        victories ++;
         if (message.classList.contains('lose-message')) {
             message.classList.remove('lose-message');
         }
@@ -257,11 +266,12 @@ function mostrarResultado(vencedor) {
         message.innerHTML = "Você perdeu! A palavra era: " + palavraSelecionada;
         playAgainButton.style.display = "block"; // Show Play Again button
         returnToMenuButton.style.display = "block"; // Show Return to Menu button
-        
+        losses ++;
         if (message.classList.contains('win-message')) {
             message.classList.remove('win-message');
         }
     }
+    victoriesAndLosses ();
     showGameButtons();
 }
 
@@ -270,3 +280,6 @@ function showGameButtons() {
     returnToMenuButton.style.display = 'block';
 }
 
+function victoriesAndLosses () {
+    victories_and_losses.innerHTML = `<p>Vitórias: ${victories} </p><p>Derrotas: ${losses} </p> `;
+}

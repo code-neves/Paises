@@ -19,6 +19,7 @@
   
 }
 
+
 body {
   font-family: 'Poppins', sans-serif;
   text-align: center;
@@ -212,9 +213,22 @@ p:hover {
 }
 
 .message {
-  margin: 3rem 0 3rem 0;
+  margin: 0 0 3rem 0;
   font-size: 2.2rem;
   display: block;
+}
+.victories_and_losses {
+  margin: 2rem 0 2rem 0;
+  font-size: 2.2rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 4rem;
+}
+
+.victories_and_losses p:hover {
+  color:white;
+  text-decoration: none;
+  transform: none;
 }
 
 .win-message{

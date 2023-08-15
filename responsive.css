@@ -36,10 +36,14 @@
         max-width: 500px;
     }
 
-    .message {
+    .message, .victories_and_losses {
         font-size: 1.8rem;
         text-align: center;
     }
+
+    .victories_and_losses {
+        display: block;
+      }
 
     #game-buttons {
         flex-direction: column;
