@@ -211,18 +211,18 @@ p:hover {
   
 }
 
-#win-message{
-  color: rgb(5, 255, 5) ;
-  margin-bottom: 1rem;
+.message {
+  margin: 3rem 0 3rem 0;
   font-size: 2.2rem;
   display: block;
 }
 
-#lose-message {
+.win-message{
+  color: rgb(5, 255, 5) ;
+}
+
+.lose-message {
   color: rgb(255, 5, 5) ;  
-  margin-bottom: 1rem;
-  font-size: 2.2rem;
-  display: block;
 }
 
 #start-button{
@@ -263,7 +263,7 @@ display: none;
   justify-content: center;
   align-content: center;
   gap: 3rem;
-  width: 500px;
+  max-width: 500px;
 
   & button{
     background-color: var(--glassy-bg);

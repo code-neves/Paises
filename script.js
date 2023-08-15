@@ -8,8 +8,7 @@ let gameIsOver = false;
 
 const exibicaoPalavra = document.getElementById("exibicao-palavra");
 const teclado = document.getElementById("teclado");
-const winMessage = document.getElementById("win-message");
-const loseMessage = document.getElementById("lose-message");
+const message = document.querySelector('.message'); 
 
 const startButton = document.getElementById("start-button");
 const playAgainButton = document.getElementById("play-again-button");
@@ -100,8 +99,7 @@ function configurarJogo() {
     atualizarExibicao();
     criarTeclado();
 
-    winMessage.innerHTML = ""; // Clear previous messages
-    loseMessage.innerHTML = "";
+    message.innerHTML = ""; // Clear previous messages
 }
 
 function atualizarExibicao() {
@@ -246,16 +244,23 @@ function retornarAoMenu() {
 function mostrarResultado(vencedor) {
     if (vencedor) {
         exibicaoPalavra.classList.add("winning");
-        winMessage.innerHTML = "Você ganhou!";
-        loseMessage.innerHTML = "";
+        message.classList.add('win-message');
+        message.innerHTML = "Você ganhou!";
         playAgainButton.style.display = "block"; // Show Play Again button
         returnToMenuButton.style.display = "block"; // Show Return to Menu button
+        if (message.classList.contains('lose-message')) {
+            message.classList.remove('lose-message');
+        }
     } else {
         exibicaoPalavra.classList.add("losing");
-        winMessage.innerHTML = "";
-        loseMessage.innerHTML = "Você perdeu! A palavra era: " + palavraSelecionada;
+        message.classList.add('lose-message');
+        message.innerHTML = "Você perdeu! A palavra era: " + palavraSelecionada;
         playAgainButton.style.display = "block"; // Show Play Again button
         returnToMenuButton.style.display = "block"; // Show Return to Menu button
+        
+        if (message.classList.contains('win-message')) {
+            message.classList.remove('win-message');
+        }
     }
     showGameButtons();
 }
