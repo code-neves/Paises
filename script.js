@@ -216,8 +216,8 @@ function retornarAoMenu() {
     // Show difficulty and continent buttons
     document.querySelector('.dificuldade').style.display = 'block';
     document.querySelector('.continente').style.display = 'block';
-    btnContinentes.innerText = 'Escolha um continente';
-    btnDificuldade.innerText = 'Escolha a dificuldade';
+    btnContinentes.innerText = 'CONTINENTE';
+    btnDificuldade.innerText = 'DIFICULDADE';
     startButton.style.display = 'block'; // Show the start button
     buttonsContainer.style.display = 'none'; // Hide game-related buttons
     teclado.style.display = 'none'; // Hide the keyboard
