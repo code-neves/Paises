@@ -1,66 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hangman Game</title>
+  <title>Países</title>
   <link href="./style.css" rel="stylesheet">
   <link rel="stylesheet" href="./responsive.css">
   <link rel="shortcut icon" href="./image/favicon.ico" type="image/x-icon">
 </head>
 <body>
-
   <header>
-
-    <h1>Países</h1>
-    <h2>Hangman Game: Country Edition</h2>
-
-    <nav>
-
-        <div class="dropdown">
-
-            <button class="dropbtn" id="dificuldade">DIFICULDADE</button>
-
-            <div class="dropdown-content dificuldade">
-                <p id="facil">Fácil - 6 vidas</p>
-                <p id="medio">Médio - 4 vidas</p>
-                <p id="dificil">Difícil - 2 vidas</p>
-            </div>
-
-        </div>
-
-        <div class="dropdown">
-
-            <button class="dropbtn" id="continentes">CONTINENTE</button>
-
-            <div class="dropdown-content continente">
-                <p id="africa">África</p>
-                <p id="america">América</p>
-                <p id="asia">Ásia</p>
-                <p id="europa">Europa</p>
-                <p id="oceania">Oceania</p>
-            </div>
-
-        </div>
-    </nav>
-</header>
-
-  <!-- Divs para exibir mensagens, palavra e teclado -->
-  <div id="exibicao-palavra"></div>
-  <div id="teclado"></div>
-  <div class="victories_and_losses"></div>
-  <div class="message"></div>
-  <!-- Botões do jogo -->
-  <div id="game-buttons" class="buttons">
-    <button id="play-again-button" class="button">Jogar Novamente</button>
-    <button id="return-to-menu-button" class="button">Voltar ao Menu</button>
+    <div class="titulo-container">
+      <h1>Países</h1>
+      <h2>Jogo da Forca: Edição Países</h2>
+    </div>
+  </header>
+  <nav>
+    <div class="dropdown ">
+      <button class="dropbtn" id="dificuldade">DIFICULDADE</button>
+      <div class="dropdown-content dificuldade">
+          <p onclick="escolherDificuldade(event)" id="facil">Fácil - 6 vidas</p>
+          <p onclick="escolherDificuldade(event)" id="medio">Médio - 4 vidas</p>
+          <p onclick="escolherDificuldade(event)"  id="dificil">Difícil - 2 vidas</p>
+      </div>
+    </div>
+    <!-- Other dropdown menu for continents -->
+    <div class="dropdown">
+      <button class="dropbtn" id="continentes">CONTINENTE</button>
+      <div class="dropdown-content continente">
+        <p  onclick="escolherContinente(event)" id="africa">África</p>
+        <p  onclick="escolherContinente(event)" id="america">América</p>
+        <p  onclick="escolherContinente(event)" id="asia">Ásia</p>
+        <p  onclick="escolherContinente(event)" id="europa">Europa</p>
+        <p  onclick="escolherContinente(event)" id="oceania">Oceania</p>
+      </div>
+    </div>
+    
+  </nav>
+  <!-- Game display and elements -->
+  <div class="gameContainer" id="game-container">
+    <!-- Word display -->
+    <div id="exibicao-palavra"></div>
+    <!-- Remaining attempts -->
+    <div id="tentativas-restantes">
+      <span id="container-vidas"></span>
+    </div>
+    <!-- Keyboard -->
+    <div id="teclado"></div>
   </div>
+  <!-- Result display -->
+  <div class="resultContainer">
+    <div class="contador-vitoria"></div>
+    <div class="mensagem"></div>
+  </div>
+  <!-- Game buttons -->
+  <div id="botoes-jogo" class="buttons">
+    <button id="botao-jogar-novamente" class="button blur" onclick="jogarNovamente()">Jogar Novamente</button>
+    <button id="botao-voltar-ao-menu" class="button blur" onclick="retornarAoMenu()">Voltar ao Menu</button>
+  </div>
+  <!-- Start button -->
+  <button id="botao-iniciar" onclick="iniciar()" class="blur">INICIAR</button>
 
-  <!-- Botão para iniciar o jogo -->
-  <button id="start-button" onclick="iniciar()">INICIAR</button>
-  
-  <footer></footer>
-  <!-- Script JavaScript -->
+
+
+  <!-- JavaScript script -->
   <script src="./script.js"></script>
 </body>
 </html>
