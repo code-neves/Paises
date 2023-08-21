@@ -25,14 +25,6 @@ const btnContinentes = document.getElementById('continentes');
 const btnDificuldade = document.getElementById('dificuldade');
 let dificuldade = '';
 
-pDificuldade.forEach(pTag => {
-    pTag.addEventListener('click', escolherDificuldade);
-});
-
-pContinente.forEach(pTag => {
-    pTag.addEventListener('click', escolherContinente);
-});
-
 function getApi() {
     let dataPaises = [];
     fetch('https://servicodados.ibge.gov.br/api/v1/paises/{paises}')
@@ -101,7 +93,7 @@ function iniciar() {
 
         resetarVidas();
 
-        botaoIniciar.style.visibility = 'hidden';
+        botaoIniciar.style.display = 'none';
         containerBotoes.style.display = 'flex';
         botaoVoltarAoMenu.style.visibility = 'visible';
         teclado.style.visibility = 'visible';
@@ -258,7 +250,7 @@ function retornarAoMenu() {
     document.querySelector('.continente').style.visibility = 'visible';
     btnContinentes.innerText = 'CONTINENTE';
     btnDificuldade.innerText = 'DIFICULDADE';
-    botaoIniciar.style.visibility = 'visible';
+    botaoIniciar.style.display = 'block';
     containerBotoes.style.visibility = 'hidden';
     teclado.style.visibility = 'hidden';
     exibicaoPalavra.textContent = "";
