@@ -108,8 +108,6 @@ function configurarJogo() {
     gameIsOver = false;
     atualizarExibicao();
     criarTeclado();
-
-    mensagem.innerHTML = ""; // Clear previous messages
 }
 
 function atualizarExibicao() {
@@ -271,26 +269,22 @@ function retornarAoMenu() {
 
 
 function mostrarResultado(vencedor) {
-    const mensagemClass = vencedor ? 'mensagem-vitoria' : 'mensagem-derrota';
-    const mensagemTexto = vencedor ? "Você ganhou!" : `Você perdeu! A palavra era: ${palavraSelecionada}`;
-    
-    exibicaoPalavra.classList.add(vencedor ? "vencedor" : "perdedor");
-    mensagem.classList.add(mensagemClass);
-    mensagem.innerHTML = mensagemTexto;
-    botaoJogarNovamente.style.display = 'block'; // Mostrar botão de Jogar Novamente
-    botaoVoltarAoMenu.style.visibility = 'visible'; // Mostrar botão de Voltar ao Menu
-    containerBotoes.style.visibility = 'visible';
-    const opostoClass = vencedor ? 'mensagem-derrota' : 'mensagem-vitoria';
-    if (mensagem.classList.contains(opostoClass)) {
-        mensagem.classList.remove(opostoClass);
-    }
+  const mensagemClass = vencedor ? 'mensagem-vitoria' : 'mensagem-derrota';
+  const mensagemTexto = vencedor ? "Você ganhou!" : `Você perdeu! A palavra era: ${palavraSelecionada}`;
+  
+  exibicaoPalavra.classList.add(vencedor ? "vencedor" : "perdedor");
+  containerVidas.innerHTML = mensagemTexto; // Set the message as the content of the container
+  containerVidas.classList.remove('container-vidas');
+  containerVidas.classList.add(mensagemClass);
+  containerVidas.style.display = 'flex'; // Show the container
 
-    if (vencedor) {
-        vitorias++;
-    } else {
-        derrotas++;
-    }
+  botaoJogarNovamente.style.display = 'block'; // Show the "Jogar Novamente" button
+  botaoVoltarAoMenu.style.visibility = 'visible'; // Show the "Voltar ao Menu" button
+  containerBotoes.style.visibility = 'visible'; // Show the game buttons
+
+  vencedor ? vitorias++ : derrotas++;
 }
+
 
 
 
