@@ -1,148 +1,285 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Poppins', sans-serif;
+	text-decoration: none;
+	list-style: none;
+	border: none;
+	
+}
+:root{
+	font-size: 10px;
+	--glassy-bg: rgba(255, 255, 255, 0.2);
+	--glassy-bg-gradient: linear-gradient(27deg, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.1) 63%);
+	--glassy-bg-hover: rgba(255, 255, 255, 0.25);
+	--glassy-outline: rgba(255, 255, 255, 0.7);
+	--glass: blur(8px);
+	--loss: #FF0000;
+	--win: rgb(0, 183, 0);
+	--teclaL: 60px;
+	--teclaM: 40px;
+	--teclaS: 30px;
+}
+html{
+	height: 100vh;
+}
 body {
-  font-family: 'Poppins', sans-serif;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  background-color: rgb(186, 199, 189);
+	font-family: 'Poppins', sans-serif;
+	text-align: center;
+	margin: auto;
+	height: 100%;
+	background-image: url(./image/background.jpeg);
+	background-size: cover;
+	background-position: center;
+	color: #FFFFFF;
+	font-weight: 600;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  padding: 10rem 0;
 }
-
+.tecla{
+	backdrop-filter: var(--glass);
+}
+.blur{
+	backdrop-filter: var(--glass);
+}
 /* HEADER */
-
-h1 {
-  margin-top: 20px;
+header{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 0.8rem;
+	width: 100%;
+	.titulo-container{
+	& h1{
+	font-size: 6.2rem;
+	}
+	& h2{
+	font-size: 2.8rem;
+	}
+	}
 }
-
 nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 2rem;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	gap: 2.5rem;
+	height: 50px;
+  
+  margin-top: 0.8rem;
 }
-
-.dropbtn {
-  background-color: #70db70;
-  width: 170px;
-  color: white;
-  padding: 10px;
-  font-size: 0.8rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-
 .dropdown {
-  position: relative;
-  display: inline-block;
+	position: relative;
+	display: inline-block;
+	font-weight: bold;
+	& button{
+	font-weight: bold;
+	}
+	& p{
+	padding: 8px 0;
+	}
 }
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: rgb(210, 224, 215);
-  width: 170px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-  z-index: 1;
+.dropbtn {
+	background: rgba(0, 0, 0, 0.012);
+	border: solid 1px var(--glassy-outline);
+	backdrop-filter: var(--glass);
+	width: 250px;
+	color: rgba(255, 255, 255, 0.866);
+	padding: 10px;
+	font-size: 1.8rem;
+	font-weight: bold;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: 0.1s ease;
+	overflow: hidden;
 }
-
-.dropdown-content p {
-  font-size: 0.8rem;
-  color: black;
-  display: block;
+.dropdown > .dropdown-content {
+	opacity: 0;
+	position: absolute;
+	background: rgba(0, 0, 0, 0.012);
+	backdrop-filter: var(--glass);
+	width: 100%;
+	border: solid var(--glassy-outline);
+	border-width: 0 1px 1px 1px;
+	border-radius: 0 0 8px 8px;
+	z-index: 1;
+	font-weight: bold;
+	transition: 0.3s ease;
+	& p {
+	font-size: 1.5rem;
+	display: block;
+	&:hover {
+	transition: 0.3s ease;
+	}
+	}
 }
-
 .dropdown-content p:hover {
-  color: #ffffff;
-  cursor: pointer;
+	color: #ffffff;
+	cursor: pointer;
 }
-
 .dropdown:hover .dropdown-content {
-  display: block;
+	opacity: 1;
+	max-height: fit-content;
 }
-
 .dropdown:hover .dropbtn {
-  background-color: #3e8e41;
+	border-radius: 5px 5px 0 0;
+	border-width: 1px 1px 0 1px;
 }
-
+/* JOGO */
+.gameContainer{
+	outline:solid 1px rgba(255, 0, 0, 0);
+}
 #exibicao-palavra {
-  font-size: 48px;
-  margin-top: 20px;
-  /* color: rgb(255, 255, 255); */
+	font-size: 48px;
+	height: 72px;
 }
-
+#tentativas-restantes{
+	font-size: 1.8rem;
+}
 #teclado {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 20px auto;
-  max-width: 700px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	margin-top: 0.8rem;
+	height: 22.8rem;
+	max-width: 80rem;
 }
-
 .tecla {
-  width: 50px;
-  height: 50px;
-  margin: 8px;
-  border-radius: 8px;
-  outline: solid 4px black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  background-color: rgba(255, 255, 255, 0.56);
-  font-size: 24px;
-  font-weight: 600;
-
-  &:hover {
-    background-color: rgb(255, 255, 255);
-  }
+	width: var(--teclaL);
+	height: var(--teclaL);
+	margin: 0.7rem;
+	font-size: 3.2rem;
+	font-weight: 600;
+	background: rgba(255, 255, 255, 0.2);
+	background: var(--glassy-bg-gradient);
+	border-radius: 8px;
+	outline: solid 1px var(--glassy-outline);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	transition: background-color 0.2s;
+	transition: transform 0.125s;
+	&:hover {
+	background-color: rgba(255, 255, 255, 0.274);
+	transform: translateY(-4px);
+	transition: 0.175s ease;
+	border-radius: 10px;
+	}
+	&:active {
+	transform: translateY(-2px);
+	transform: scale(0.75);
+	border-radius: 12px;
+	transition: 0.125s ease;
+	}
+}
+.tecla.adivinhada {
+	color: #FFFFFF;
+	outline: solid 2px white;
+	pointer-events: none;
+	transform: scale(0.80);
+}
+.tecla.errada {
+	background: var(--loss);
+}
+.tecla.correta {
+	background-color: var(--win);
+}
+.vencedor {
+	color: var(--win) ;
+	transform: scale(1.05);
+}
+.perdedor{
+	color: var(--loss) ;
+	transform: scale(1.05);
+}
+.contador-vitoria {
+	margin: 0;
+	font-size: 1.8rem;
+	display: flex;
+	justify-content: space-between;
+	height: auto;
+	gap: 3rem;
+}
+.contador-vitoria p:hover {
+	color: #FFFFFF;
+	text-decoration: none;
+	transform: none;
+}
+.mensagem-vitoria{
+	color: var(--win) ;
+}
+.mensagem-derrota{
+	color: var(--loss) ;
 }
 
-.tecla.clicada {
-  background-color: rgb(0, 0, 0);
-  color: white;
-  outline: solid 4px white;
-  pointer-events: none;
+.mensagem-vitoria, .mensagem-derrota{
+  justify-content:center;
 }
-.tecla.wrong {
-  background-color: #ff6b6b; /* Red color for wrong letters */
+#botao-iniciar{
+	width: 25rem;
+	cursor: pointer;
+	border: none;
+	background: var(--glassy-bg);
+	background: var(--glassy-bg-gradient);
+	padding: 0 16px;
+	pointer-events: all;
+	color: #FFFFFF;
+	height: 50px;
+	
+	border-radius: 8px;
+	outline: solid 1px var(--glassy-outline);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	transition: background-color 0.2s;
+	background-color: var(--glassy-bg);
+	font-size: 2.4rem;
+	font-weight: 600;
+	transition: 0.100s ease;
+
+	&:hover {
+	background-color: rgba(255, 255, 255, 0.384);
+	transform: translateY(-2px);
+	transition: 0.125s ease;
+	}
 }
 
-.tecla.correct {
-  background-color: #70db70; /* Green color for correct letters */
+#botao-jogar-novamente{
+	display: none;
 }
-
-.winning {
-  color: rgb(5, 255, 5) ; /* Change to the desired color */
-  transform: scale(1.2);
-  
-}
-.losing{
-  color: rgb(255, 5, 5) ; /* Change to the desired color */
-  transform: scale(1.2);
-  
-}
-
-#win-message{
-  margin-top: 1rem;
-}
-
-#lose-message {
-  margin-top: 1rem;
-}
-
-#restart-button{
-  width: fit-content;
-  cursor: pointer;
-  border: none;
-  padding: 0 16px;
+#botoes-jogo{
+	display: none;
+	justify-content: center;
+	align-content: center;
+	gap: 3rem;
+	margin-top: 0.8rem;
+	max-width: 50rem;
+	& button{
+	background-color: var(--glassy-bg);
+	background-color: var(--glassy-bg-gradient);
+	outline: solid 1px var(--glassy-outline);
+	box-shadow: 0 0 1.6rem 0px rgba(0, 0, 0, 0.3);
+	width: 19rem;
+	padding: 1rem;
+	color: #FFFFFF;
+	font-size: 1.8rem;
+	font-weight: bold;
+	border-radius: 8px;
+	transition: 0.100s ease;
+	cursor: pointer;
+	&:hover {
+	background-color: rgba(255, 255, 255, 0.274);
+	transform: translateY(-4px);
+	transition: 0.175s ease;
+	}
+	}
 }

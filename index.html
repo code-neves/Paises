@@ -1,56 +1,71 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <title>Jogo da Forca</title>
+  <title>Países</title>
+  <link href="./style.css" rel="stylesheet">
+  <link rel="stylesheet" href="./responsive.css">
+  <link rel="shortcut icon" href="./image/favicon.ico" type="image/x-icon">
 </head>
 <body>
   <header>
+    <div class="titulo-container">
+      <h1>Países</h1>
+      <h2>Jogo da Forca: Edição Países</h2>
+    </div>
+  </header>
+  <nav>
+    <div class="dropdown ">
+      <button class="dropbtn" id="dificuldade">DIFICULDADE</button>
+      <div class="dropdown-content dificuldade">
+          <p onclick="escolherDificuldade(event)" id="facil">Fácil - 6 vidas</p>
+          <p onclick="escolherDificuldade(event)" id="medio">Médio - 4 vidas</p>
+          <p onclick="escolherDificuldade(event)"  id="dificil">Difícil - 2 vidas</p>
+      </div>
+    </div>
+    <!-- Other dropdown menu for continents -->
+    <div class="dropdown">
+      <button class="dropbtn" id="continentes">CONTINENTE</button>
+      <div class="dropdown-content continente">
+        <p  onclick="escolherContinente(event)" id="africa">África</p>
+        <p  onclick="escolherContinente(event)" id="america">América</p>
+        <p  onclick="escolherContinente(event)" id="asia">Ásia</p>
+        <p  onclick="escolherContinente(event)" id="europa">Europa</p>
+        <p  onclick="escolherContinente(event)" id="oceania">Oceania</p>
+      </div>
+    </div>
+    
+  </nav>
+  <!-- Game display and elements -->
+  <div class="gameContainer" id="game-container">
+    <!-- Word display -->
+    <div id="exibicao-palavra"></div>
+    <!-- Remaining attempts -->
+    <div id="tentativas-restantes">
+      <span id="container-vidas"></span>
+    </div>
+    <!-- Keyboard -->
+    <div id="teclado"></div>
+  </div>
+  <div class="wrapper">
+    <!-- Result display -->
+    <div class="resultContainer">
+      <div class="contador-vitoria"></div>
+    </div>
 
-    <h1>Jogo da Forca</h1>
-    <h2>Países</h2>
+ 
+    <!-- Game buttons -->
+    <div id="botoes-jogo" class="buttons">
+      <button id="botao-jogar-novamente" class="button blur" onclick="jogarNovamente()">Jogar Novamente</button>
+      <button id="botao-voltar-ao-menu" class="button blur" onclick="retornarAoMenu()">Voltar ao Menu</button>
+    </div>
+    <!-- Start button -->
+    <button id="botao-iniciar" onclick="iniciar()" class="blur">INICIAR</button>
+  </div>
 
-    <nav>
 
-        <div class="dropdown">
-
-            <button class="dropbtn" id="dificuldade">Escolha a dificuldade</button>
-
-            <div class="dropdown-content dificuldade">
-                <p id="facil">Fácil - 6 vidas</p>
-                <p id="medio">Médio - 4 vidas</p>
-                <p id="dificil">Difícil - 2 vidas</p>
-            </div>
-
-        </div>
-
-        <div class="dropdown">
-
-            <button class="dropbtn" id="continentes">Escolha um continente</button>
-
-            <div class="dropdown-content continente">
-                <p id="africa">África</p>
-                <p id="america">América</p>
-                <p id="asia">Ásia</p>
-                <p id="europa">Europa</p>
-                <p id="oceania">Oceania</p>
-            </div>
-
-        </div>
-    </nav>
-</header>
-  <div id="win-message"></div>
-  <div id="lose-message"></div> 
-  <div id="exibicao-palavra"></div>
-  <div id="letras-adivinhadas"></div>
-  <div id="teclado"></div>
-  <button id="restart-button" class="tecla" onclick="iniciar()">INICIAR</button>
-  
+  <!-- JavaScript script -->
   <script src="./script.js"></script>
 </body>
 </html>
- 
-
- 

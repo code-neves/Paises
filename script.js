@@ -3,20 +3,28 @@ let regiao = '';
 
 let palavraSelecionada = "";
 let letrasAdivinhadas = [];
-let tentativasRestantes = 6;
+let tentativasRestantes = 0;
+let gameIsOver = false;
 
 const exibicaoPalavra = document.getElementById("exibicao-palavra");
 const teclado = document.getElementById("teclado");
-const letrasAdivinhadasDisplay = document.getElementById("letras-adivinhadas");
-const restartButton = document.getElementById("restart-button");
-const winMessage = document.getElementById("win-message");
-const loseMessage = document.getElementById("lose-message");
+const contadorVitoria = document.querySelector('.contador-vitoria');
 
+let vitorias = 0;
+let derrotas = 0;
 
-const pDifficult = document.querySelectorAll('.dificuldade p');
-const pContinent = document.querySelectorAll('.continente p');
+const botaoIniciar = document.getElementById("botao-iniciar");
+const botaoJogarNovamente = document.getElementById("botao-jogar-novamente");
+const botaoVoltarAoMenu = document.getElementById("botao-voltar-ao-menu");
+const containerBotoes = document.getElementById("botoes-jogo");
+const containerVidas = document.getElementById("container-vidas");
+const pDificuldade = document.querySelectorAll('.dificuldade p');
+const pContinente = document.querySelectorAll('.continente p');
 const btnContinentes = document.getElementById('continentes');
 const btnDificuldade = document.getElementById('dificuldade');
+
+let dificuldade = '';
+
 
 function getApi() {
     let dataPaises = [];
@@ -30,103 +38,94 @@ function getApi() {
                         if (!array.includes(' ') && !array.includes('-')) {
                             dataPaises.push(paises[pais].nome.abreviado);
                         }
-
                     }
-
                 }
             }
         });
     return dataPaises;
 }
 
-function dificuldade(event) {
+function escolherDificuldade(event) {
+    dificuldade = event.target.textContent;
+    btnDificuldade.innerText = dificuldade;
 
-    if (event.target.textContent == 'Fácil - 6 vidas') {
-        btnDificuldade.innerText = event.target.textContent;
-        tentativasRestantes = 6;
-    } else if (event.target.textContent == 'Médio - 4 vidas') {
-        btnDificuldade.innerText = event.target.textContent;
-        tentativasRestantes = 4;
-    } else if (event.target.textContent == 'Difícil - 2 vidas') {
-        btnDificuldade.innerText = event.target.textContent;
-        tentativasRestantes = 2;
-    } else {
-        tentativasRestantes = 6;
-    };
-
-
-};
-
-function continentes(event) {
-
-    for (let i = 0; i <= pContinent.length; i++) {
-        if (event.target.textContent == pContinent[i].textContent) {
-            btnContinentes.innerText = event.target.textContent;
-            regiao = event.target.textContent;
-            palavras = getApi();
-            console.log(palavras);
-        }
+    switch (dificuldade) {
+        case 'Fácil - 6 vidas':
+            tentativasRestantes = 6;
+            break;
+        case 'Médio - 4 vidas':
+            tentativasRestantes = 4;
+            break;
+        case 'Difícil - 2 vidas':
+            tentativasRestantes = 2;
+            break;
+        default:
+            tentativasRestantes = 0;
+            break;
     }
+}
 
+function escolherContinente(event) {
+    btnContinentes.innerText = event.target.textContent;
+    regiao = event.target.textContent;
+    palavras = getApi();
+    console.log(palavras);
+}
+
+function resetarVidas() {
+    containerVidas.innerHTML = ""; // Clear the hearts container
+
+    for (let i = 0; i < tentativasRestantes; i++) {
+        const vida = document.createElement("span");
+        vida.className = "vida";
+        vida.innerHTML = "❤️"; // You can use any heart emoji here
+        containerVidas.appendChild(vida);
+    }
 }
 
 function iniciar() {
-    if (regiao == "" || palavras == undefined) {
-        alert('Escolha a dificuldade e o continente para iniciar o jogo')
-    } else if (restartButton.innerText == 'REINICIAR') {
-        location.reload();
+    if (regiao == "" || palavras == undefined || tentativasRestantes == 0) {
+        alert('Escolha a dificuldade e o continente para iniciar o jogo');
     } else {
         configurarJogo();
         console.log("Iniciando o jogo...");
-        document.querySelector('.dificuldade').style.display = 'none';
-        document.querySelector('.continente').style.display = 'none';
-        btnContinentes.style.backgroundColor = '#3e8e41';
-        btnDificuldade.style.backgroundColor = '#3e8e41';
-        restartButton.innerText = 'REINICIAR';
+        document.querySelector('.dificuldade').style.visibility = 'hidden';
+        document.querySelector('.continente').style.visibility = 'hidden';
 
+        resetarVidas();
+
+        botaoIniciar.style.display = 'none';
+        containerBotoes.style.display = 'flex';
+        botaoVoltarAoMenu.style.visibility = 'visible';
+        teclado.style.visibility = 'visible';
+        contadorVitoria.innerHTML = "";
     }
-
 }
-
 
 function configurarJogo() {
     console.log("Configurando o jogo...");
     palavraSelecionada = palavras[Math.floor(Math.random() * palavras.length)];
     letrasAdivinhadas = [];
-
+    gameIsOver = false;
     atualizarExibicao();
-    atualizarLetrasAdivinhadasDisplay();
     criarTeclado();
-    winMessage.innerHTML = ""; // Clear previous messages
-    loseMessage.innerHTML = "";
-}
-
-function removeAccents(str) {
-    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
 function atualizarExibicao() {
-    let displayText = "";
+    let textoExibicao = "";
 
-    for (let i of palavraSelecionada) {
+    for (let i = 0; i < palavraSelecionada.length; i++) {
         const letra = palavraSelecionada[i];
         if (letrasAdivinhadas.includes(letra)) {
-            displayText += letra;
+            textoExibicao += letra;
         } else {
-            displayText += "_";
+            textoExibicao += "_";
         }
     }
 
-    exibicaoPalavra.textContent = displayText;
+    exibicaoPalavra.textContent = textoExibicao;
 
-    exibicaoPalavra.classList.remove("winning", "losing"); // Clear previous classes
-
-}
-
-function atualizarLetrasAdivinhadasDisplay() {
-    console.log("Atualizando a exibição das letras adivinhadas...");
-    letrasAdivinhadasDisplay.textContent = letrasAdivinhadas.join(" ");
-    console.log("Letras adivinhadas:", letrasAdivinhadas);
+    exibicaoPalavra.classList.remove("vencedor", "perdedor");
 }
 
 function criarTeclado() {
@@ -143,57 +142,158 @@ function criarTeclado() {
     }
 }
 
+function removerAcentos(str) {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
 function lidarComClique(letra) {
     console.log("Lidando com clique na letra:", letra);
     const teclaClicada = Array.from(document.querySelectorAll(".tecla")).find(tecla => tecla.textContent === letra);
 
-    if (teclaClicada && !teclaClicada.classList.contains("guessed")) {
+    if (teclaClicada && !teclaClicada.classList.contains("adivinhada")) {
         console.log("Letra adivinhada:", letra);
-        const letraSemAcento = removeAccents(letra.toLowerCase());
+        const letraSemAcento = removerAcentos(letra.toLowerCase());
         letrasAdivinhadas.push(letraSemAcento);
-        teclaClicada.classList.add("guessed"); // Add this line
+        teclaClicada.classList.add("adivinhada"); // Adicionar essa linha
 
-        let letraEncontrada = false;
-
-        for (let i = 0; i < palavraSelecionada.length; i++) {
-            const letraPalavraSemAcento = removeAccents(palavraSelecionada[i].toLowerCase());
-            if (letraPalavraSemAcento === letraSemAcento) {
-                exibicaoPalavra.textContent = exibicaoPalavra.textContent.substring(0, i) + palavraSelecionada[i] + exibicaoPalavra.textContent.substring(i + 1);
-                letraEncontrada = true;
-            }
-        }
+        const letraEncontrada = verificarLetraEncontrada(letraSemAcento);
 
         if (!letraEncontrada) {
             console.log("Letra errada:", letra);
-            teclaClicada.classList.add("wrong"); // Add this line
-            tentativasRestantes--;
-            if (tentativasRestantes === 0) {
-                mostrarResultado(false);
-                return;
-            }
+            tratarLetraErrada(teclaClicada);
         } else {
-            teclaClicada.classList.add("correct"); // Add this line
+            teclaClicada.classList.add("correta"); // Adicionar essa linha
         }
 
-        atualizarLetrasAdivinhadasDisplay();
+        verificarFimDoJogo();
+    }
 
-        if (exibicaoPalavra.textContent === palavraSelecionada) {
-            mostrarResultado(true);
+    if (gameIsOver) return; // Retornar se o jogo já acabou
+}
+
+function verificarLetraEncontrada(letraSemAcento) {
+    let letraEncontrada = false;
+
+    for (let i = 0; i < palavraSelecionada.length; i++) {
+        const letraPalavraSemAcento = removerAcentos(palavraSelecionada[i].toLowerCase());
+
+        if (letraPalavraSemAcento === letraSemAcento) {
+            exibicaoPalavra.textContent =
+                exibicaoPalavra.textContent.substring(0, i) +
+                palavraSelecionada[i] +
+                exibicaoPalavra.textContent.substring(i + 1);
+            
+            letraEncontrada = true; // Tratamento pra repetição 
         }
     }
+
+    return letraEncontrada;
 }
+
+function tratarLetraErrada(teclaClicada) {
+    teclaClicada.classList.add("errada"); // Adicionar essa linha
+    tentativasRestantes--;
+    const vidas = containerVidas.querySelectorAll("span");
+    if (vidas.length > tentativasRestantes) {
+        containerVidas.removeChild(vidas[vidas.length - 1]);
+    }
+    if (tentativasRestantes === 0) {
+        mostrarResultado(false);
+        gameIsOver = true; // Definir gameIsOver como true quando o jogo é perdido
+        desabilitarTeclado();
+    }
+}
+
+function verificarFimDoJogo() {
+    if (exibicaoPalavra.textContent === palavraSelecionada) {
+        mostrarResultado(true);
+        gameIsOver = true; // Definir gameIsOver como true quando o jogo é ganho
+        desabilitarTeclado();
+    }
+}
+
+function desabilitarTeclado() {
+    const teclas = document.querySelectorAll(".tecla");
+    teclas.forEach(tecla => {
+        tecla.style.pointerEvents = "none"; // Desabilitar eventos de ponteiro para as teclas do teclado
+    });
+}
+
+function jogarNovamente() {
+    switch (dificuldade) {
+        case 'Fácil - 6 vidas':
+            tentativasRestantes = 6;
+            break;
+        case 'Médio - 4 vidas':
+            tentativasRestantes = 4;
+            break;
+        case 'Difícil - 2 vidas':
+            tentativasRestantes = 2;
+            break;
+        default:
+            tentativasRestantes = 0;
+            break;
+    }
+    configurarJogo();
+    resetarVidas();
+    botaoJogarNovamente.style.display = 'none'; // Esconder o botão "Jogar Novamente"
+    UpdatecontadorVitoria()
+}
+
+function retornarAoMenu() {
+    // Resetar os botoes
+    botaoJogarNovamente.style.display = 'none';
+    botaoVoltarAoMenu.style.visibility = 'hidden';
+    configurarJogo();
+    document.querySelector('.dificuldade').style.visibility = 'visible';
+    document.querySelector('.continente').style.visibility = 'visible';
+    btnContinentes.innerText = 'CONTINENTE';
+    btnDificuldade.innerText = 'DIFICULDADE';
+    botaoIniciar.style.display = 'block';
+    containerBotoes.style.visibility = 'hidden';
+    teclado.style.visibility = 'hidden';
+    exibicaoPalavra.textContent = "";
+    contadorVitoria.innerHTML = "";
+
+    // Resetar as variáveis
+    palavras = undefined;
+    tentativasRestantes = 0;
+    vitorias = 0;
+    derrotas = 0;
+    resetarVidas();
+
+    // Limpadinha no console de cria
+    console.clear();
+    console.log("Retornando ao menu...");
+}
+
+
 
 function mostrarResultado(vencedor) {
-    if (vencedor) {
-        exibicaoPalavra.classList.add("winning");
-        winMessage.innerHTML = "Você ganhou!";
-        loseMessage.innerHTML = "";
-    } else {
-        exibicaoPalavra.classList.add("losing");
-        winMessage.innerHTML = "";
-        loseMessage.innerHTML = "Você perdeu! A palavra era: " + palavraSelecionada;
-    }
+  const mensagemClass = vencedor ? 'mensagem-vitoria' : 'mensagem-derrota';
+  const mensagemTexto = vencedor ? "Você ganhou!" : `Você perdeu! A palavra era: ${palavraSelecionada}`;
+  
+  exibicaoPalavra.classList.add(vencedor ? "vencedor" : "perdedor");
+  containerVidas.innerHTML = mensagemTexto; // Set the message as the content of the container
+  containerVidas.classList.remove('container-vidas');
+  containerVidas.classList.add(mensagemClass);
+  containerVidas.style.display = 'flex'; // Show the container
 
+  botaoJogarNovamente.style.display = 'block'; // Show the "Jogar Novamente" button
+  botaoVoltarAoMenu.style.visibility = 'visible'; // Show the "Voltar ao Menu" button
+  containerBotoes.style.visibility = 'visible'; // Show the game buttons
+
+  vencedor ? vitorias++ : derrotas++;
 }
 
 
+
+
+function mostrarBotoesJogo() {
+    botaoJogarNovamente.style.visibility = 'visible';
+    botaoVoltarAoMenu.style.visibility = 'visible';
+}
+
+function UpdatecontadorVitoria() {
+    contadorVitoria.innerHTML = `<p>Vitórias: ${vitorias} </p><p>Derrotas: ${derrotas} </p> `;
+}
