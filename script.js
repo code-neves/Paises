@@ -181,14 +181,22 @@ function lidarComClique(letra) {
 }
 
 function verificarLetraEncontrada(letraSemAcento) {
+    let letraEncontrada = false;
+
     for (let i = 0; i < palavraSelecionada.length; i++) {
         const letraPalavraSemAcento = removerAcentos(palavraSelecionada[i].toLowerCase());
+
         if (letraPalavraSemAcento === letraSemAcento) {
-            exibicaoPalavra.textContent = exibicaoPalavra.textContent.substring(0, i) + palavraSelecionada[i] + exibicaoPalavra.textContent.substring(i + 1);
-            return true;
+            exibicaoPalavra.textContent =
+                exibicaoPalavra.textContent.substring(0, i) +
+                palavraSelecionada[i] +
+                exibicaoPalavra.textContent.substring(i + 1);
+            
+            letraEncontrada = true; // Tratamento pra repetição 
         }
     }
-    return false;
+
+    return letraEncontrada;
 }
 
 function tratarLetraErrada(teclaClicada) {
