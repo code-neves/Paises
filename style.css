@@ -145,14 +145,14 @@ nav {
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
-	margin-top: 3.2rem;
+	margin-top: 0.8rem;
 	height: 22.8rem;
 	max-width: 80rem;
 }
 .tecla {
 	width: var(--teclaL);
 	height: var(--teclaL);
-	margin: 0.8rem;
+	margin: 0.7rem;
 	font-size: 3.2rem;
 	font-weight: 600;
 	background: rgba(255, 255, 255, 0.2);
@@ -173,7 +173,7 @@ nav {
 	}
 	&:active {
 	transform: translateY(-2px);
-	transform: scale(0.85);
+	transform: scale(0.75);
 	border-radius: 12px;
 	transition: 0.125s ease;
 	}
@@ -182,7 +182,7 @@ nav {
 	color: #FFFFFF;
 	outline: solid 2px white;
 	pointer-events: none;
-	transform: scale(0.9);
+	transform: scale(0.80);
 }
 .tecla.errada {
 	background: var(--loss);
@@ -192,25 +192,24 @@ nav {
 }
 .vencedor {
 	color: var(--win) ;
-	transform: scale(1.1);
+	transform: scale(1.05);
 }
 .perdedor{
 	color: var(--loss) ;
-	transform: scale(1.1);
+	transform: scale(1.05);
 }
 .mensagem {
-	margin-bottom: 1rem;
-	font-size: 2.2rem;
+	font-size: 2.4rem;
 	display: block;
 	height: 3.6rem;
 }
 .contador-vitoria {
 	margin: 0;
-	font-size: 2.2rem;
+	font-size: 1.8rem;
 	display: flex;
 	justify-content: space-between;
-	height: 3.6rem;
-	gap: 4rem;
+	height: auto;
+	gap: 3rem;
 }
 .contador-vitoria p:hover {
 	color: #FFFFFF;
