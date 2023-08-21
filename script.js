@@ -18,17 +18,6 @@ const pContinent = document.querySelectorAll('.continente p');
 const btnContinentes = document.getElementById('continentes');
 const btnDificuldade = document.getElementById('dificuldade');
 
-
-
-pDifficult.forEach(pTag => {
-    pTag.addEventListener('click', dificuldade);
-});
-
-pContinent.forEach(pTag => {
-    pTag.addEventListener('click', continentes);
-});
-
-
 function getApi() {
     let dataPaises = [];
     fetch('https://servicodados.ibge.gov.br/api/v1/paises/{paises}')
