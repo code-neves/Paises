@@ -71,6 +71,8 @@ nav {
 	align-items: center;
 	gap: 2.5rem;
 	height: 50px;
+  
+  margin-top: 0.8rem;
 }
 .dropdown {
 	position: relative;
@@ -145,7 +147,7 @@ nav {
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
-	margin-top: 0.8rem;
+	margin: 0.8rem 0;
 	height: 22.8rem;
 	max-width: 80rem;
 }
@@ -221,6 +223,10 @@ nav {
 }
 .mensagem-derrota{
 	color: var(--loss) ;
+}
+
+.mensagem-vitoria, .mensagem-derrota{
+  justify-content:center;
 }
 #botao-iniciar{
 	width: 25rem;
