@@ -279,6 +279,7 @@ function mostrarResultado(vencedor) {
     mensagem.innerHTML = mensagemTexto;
     botaoJogarNovamente.style.display = 'block'; // Mostrar botão de Jogar Novamente
     botaoVoltarAoMenu.style.visibility = 'visible'; // Mostrar botão de Voltar ao Menu
+    containerBotoes.style.visibility = 'visible';
     const opostoClass = vencedor ? 'mensagem-derrota' : 'mensagem-vitoria';
     if (mensagem.classList.contains(opostoClass)) {
         mensagem.classList.remove(opostoClass);
