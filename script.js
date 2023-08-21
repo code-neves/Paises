@@ -8,7 +8,6 @@ let gameIsOver = false;
 
 const exibicaoPalavra = document.getElementById("exibicao-palavra");
 const teclado = document.getElementById("teclado");
-const mensagem = document.querySelector('.mensagem');
 const contadorVitoria = document.querySelector('.contador-vitoria');
 
 let vitorias = 0;
@@ -23,7 +22,9 @@ const pDificuldade = document.querySelectorAll('.dificuldade p');
 const pContinente = document.querySelectorAll('.continente p');
 const btnContinentes = document.getElementById('continentes');
 const btnDificuldade = document.getElementById('dificuldade');
+
 let dificuldade = '';
+
 
 function getApi() {
     let dataPaises = [];
