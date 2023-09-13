@@ -72,28 +72,15 @@ function escolherContinente(event) {
     console.log(palavras);
 }
 
-function resetarVidas() {
-    containerVidas.innerHTML = ""; // Clear the hearts container
-
-    for (let i = 0; i < tentativasRestantes; i++) {
-        const vida = document.createElement("span");
-        vida.className = "vida";
-        vida.innerHTML = "❤️"; // You can use any heart emoji here
-        containerVidas.appendChild(vida);
-    }
-}
-
 function iniciar() {
     if (regiao == "" || palavras == undefined || tentativasRestantes == 0) {
         alert('Escolha a dificuldade e o continente para iniciar o jogo');
     } else {
         configurarJogo();
-        console.log("Iniciando o jogo...");
         document.querySelector('.dificuldade').style.visibility = 'hidden';
         document.querySelector('.continente').style.visibility = 'hidden';
-
         resetarVidas();
-
+        UpdatecontadorVitoria();
         botaoIniciar.style.display = 'none';
         containerBotoes.style.display = 'flex';
         botaoVoltarAoMenu.style.visibility = 'visible';
@@ -103,17 +90,29 @@ function iniciar() {
 }
 
 function configurarJogo() {
-    console.log("Configurando o jogo...");
     palavraSelecionada = palavras[Math.floor(Math.random() * palavras.length)];
     letrasAdivinhadas = [];
     gameIsOver = false;
     atualizarExibicao();
     criarTeclado();
+    UpdatecontadorVitoria();
 }
+
+function resetarVidas() {
+    containerVidas.innerHTML = ""; // Clear the hearts container
+    for (let i = 0; i < tentativasRestantes; i++) {
+        const vida = document.createElement("span");
+        vida.className = "vida";
+        vida.innerHTML = "❤️"; // You can use any heart emoji here
+        containerVidas.appendChild(vida);
+    }
+}
+
+
+
 
 function atualizarExibicao() {
     let textoExibicao = "";
-
     for (let i = 0; i < palavraSelecionada.length; i++) {
         const letra = palavraSelecionada[i];
         if (letrasAdivinhadas.includes(letra)) {
@@ -122,23 +121,27 @@ function atualizarExibicao() {
             textoExibicao += "_";
         }
     }
-
     exibicaoPalavra.textContent = textoExibicao;
-
     exibicaoPalavra.classList.remove("vencedor", "perdedor");
+    containerVidas.classList.remove("mensagem-vitoria", "mensagem-derrota");
 }
 
 function criarTeclado() {
-    console.log("Criando o teclado...");
     teclado.innerHTML = "";
-
     for (let i = 65; i <= 90; i++) {
         const letra = String.fromCharCode(i);
+        
+        const container = document.createElement("div");
+        container.classList.add("tecla-container");
+        
         const elementoTecla = document.createElement("div");
         elementoTecla.classList.add("tecla");
         elementoTecla.textContent = letra;
-        elementoTecla.addEventListener("click", () => lidarComClique(letra));
-        teclado.appendChild(elementoTecla);
+        elementoTecla.dataset.letra = letra;
+        container.appendChild(elementoTecla);
+
+        container.addEventListener("click", () => lidarComClique(letra));
+        teclado.appendChild(container);
     }
 }
 
@@ -147,11 +150,8 @@ function removerAcentos(str) {
 }
 
 function lidarComClique(letra) {
-    console.log("Lidando com clique na letra:", letra);
     const teclaClicada = Array.from(document.querySelectorAll(".tecla")).find(tecla => tecla.textContent === letra);
-
     if (teclaClicada && !teclaClicada.classList.contains("adivinhada")) {
-        console.log("Letra adivinhada:", letra);
         const letraSemAcento = removerAcentos(letra.toLowerCase());
         letrasAdivinhadas.push(letraSemAcento);
         teclaClicada.classList.add("adivinhada"); // Adicionar essa linha
@@ -159,8 +159,8 @@ function lidarComClique(letra) {
         const letraEncontrada = verificarLetraEncontrada(letraSemAcento);
 
         if (!letraEncontrada) {
-            console.log("Letra errada:", letra);
             tratarLetraErrada(teclaClicada);
+    
         } else {
             teclaClicada.classList.add("correta"); // Adicionar essa linha
         }
@@ -191,32 +191,41 @@ function verificarLetraEncontrada(letraSemAcento) {
 }
 
 function tratarLetraErrada(teclaClicada) {
-    teclaClicada.classList.add("errada"); // Adicionar essa linha
+    teclaClicada.classList.add("errada"); 
     tentativasRestantes--;
     const vidas = containerVidas.querySelectorAll("span");
     if (vidas.length > tentativasRestantes) {
         containerVidas.removeChild(vidas[vidas.length - 1]);
     }
-    if (tentativasRestantes === 0) {
-        mostrarResultado(false);
-        gameIsOver = true; // Definir gameIsOver como true quando o jogo é perdido
-        desabilitarTeclado();
-    }
+    
 }
 
 function verificarFimDoJogo() {
+    console.log("Verificando fim do jogo...");
     if (exibicaoPalavra.textContent === palavraSelecionada) {
         mostrarResultado(true);
-        gameIsOver = true; // Definir gameIsOver como true quando o jogo é ganho
+        gameIsOver = true; 
         desabilitarTeclado();
+    }
+    
+
+    if (tentativasRestantes === 0) {
+        mostrarResultado(false);
+        gameIsOver = true; 
+        desabilitarTeclado();
+
     }
 }
 
 function desabilitarTeclado() {
     const teclas = document.querySelectorAll(".tecla");
     teclas.forEach(tecla => {
-        tecla.style.pointerEvents = "none"; // Desabilitar eventos de ponteiro para as teclas do teclado
+        tecla.style.pointerEvents = "none";
     });
+
+    teclado.style.pointerEvents = "none";
+
+    console.log("Teclado desabilitado!");
 }
 
 function jogarNovamente() {
@@ -236,8 +245,9 @@ function jogarNovamente() {
     }
     configurarJogo();
     resetarVidas();
+    UpdatecontadorVitoria();
+    teclado.style.pointerEvents = "auto";
     botaoJogarNovamente.style.display = 'none'; // Esconder o botão "Jogar Novamente"
-    UpdatecontadorVitoria()
 }
 
 function retornarAoMenu() {
@@ -252,6 +262,7 @@ function retornarAoMenu() {
     botaoIniciar.style.display = 'block';
     containerBotoes.style.visibility = 'hidden';
     teclado.style.visibility = 'hidden';
+    teclado.style.pointerEvents = "auto";
     exibicaoPalavra.textContent = "";
     contadorVitoria.innerHTML = "";
 
@@ -262,9 +273,6 @@ function retornarAoMenu() {
     derrotas = 0;
     resetarVidas();
 
-    // Limpadinha no console de cria
-    console.clear();
-    console.log("Retornando ao menu...");
 }
 
 
@@ -274,20 +282,17 @@ function mostrarResultado(vencedor) {
   const mensagemTexto = vencedor ? "Você ganhou!" : `Você perdeu! A palavra era: ${palavraSelecionada}`;
   
   exibicaoPalavra.classList.add(vencedor ? "vencedor" : "perdedor");
-  containerVidas.innerHTML = mensagemTexto; // Set the message as the content of the container
+  containerVidas.innerHTML = mensagemTexto; 
   containerVidas.classList.remove('container-vidas');
   containerVidas.classList.add(mensagemClass);
-  containerVidas.style.display = 'flex'; // Show the container
+  containerVidas.style.display = 'flex'; 
 
-  botaoJogarNovamente.style.display = 'block'; // Show the "Jogar Novamente" button
-  botaoVoltarAoMenu.style.visibility = 'visible'; // Show the "Voltar ao Menu" button
-  containerBotoes.style.visibility = 'visible'; // Show the game buttons
+  botaoJogarNovamente.style.display = 'block'; 
+  botaoVoltarAoMenu.style.visibility = 'visible';  
+  containerBotoes.style.visibility = 'visible'; 
 
   vencedor ? vitorias++ : derrotas++;
 }
-
-
-
 
 function mostrarBotoesJogo() {
     botaoJogarNovamente.style.visibility = 'visible';
@@ -295,5 +300,5 @@ function mostrarBotoesJogo() {
 }
 
 function UpdatecontadorVitoria() {
-    contadorVitoria.innerHTML = `<p>Vitórias: ${vitorias} </p><p>Derrotas: ${derrotas} </p> `;
+    contadorVitoria.innerHTML = `<p>Vitórias: ${vitorias} </p><p>Derrotas: ${derrotas} </p>`;
 }
