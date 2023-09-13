@@ -35,7 +35,7 @@ body {
 	text-align: center;
 	margin: auto;
 	height: 100%;
-	background-image: url(./image/bg1.jpg);
+	background-image: url(../image/bg1.jpg);
 	background-size: cover;
 	background-position: center;
 	color: #FFFFFF;
