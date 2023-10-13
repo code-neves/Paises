@@ -2,7 +2,7 @@
 
 Países is a web-based hangman game that challenges your word-guessing and geography skills. Try to guess the hidden country before you run out of attempts. Have fun and test your geography knowledge!
 
-https://github.com/code-neves/Paises/assets/127349682/a5dc621f-0ac1-4dcf-9366-6e3e78292b81
+
 
 ![image](https://github.com/code-neves/Paises/assets/127349682/7b777320-d425-45f9-9136-0997cdf07863)
 
@@ -27,6 +27,8 @@ You can play Países by following this [link](https://code-neves.github.io/Paise
 3. Start the game by selecting your preferred continent and difficulty level.
 
 ## Screenshots
+
+https://github.com/code-neves/Paises/assets/127349682/a5dc621f-0ac1-4dcf-9366-6e3e78292b81
 
 ![image](https://github.com/code-neves/Paises/assets/127349682/5d26ae10-1c31-4bc1-b642-932135884ac7)
 ![image](https://github.com/code-neves/Paises/assets/127349682/161ad52d-ff34-4ddc-bef9-e4a134c9e582)
